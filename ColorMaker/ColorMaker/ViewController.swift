@@ -11,9 +11,9 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var colorView: UIView!
-    @IBOutlet var redSwitch: UISwitch!
-    @IBOutlet var greenSwitch: UISwitch!
-    @IBOutlet var blueSwitch: UISwitch!
+    @IBOutlet var redSlider: UISlider!
+    @IBOutlet var greenSlider: UISlider!
+    @IBOutlet var blueSlider: UISlider!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +21,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func changeColor() {
-        let r: CGFloat = self.redSwitch.isOn ? 1 : 0
-        let g: CGFloat = self.greenSwitch.isOn ? 1 : 0
-        let b: CGFloat = self.blueSwitch.isOn ? 1 : 0
+        let rf = redSlider.value
+        let r: CGFloat = CGFloat(rf)
+        let gf = greenSlider.value
+        let g: CGFloat = CGFloat(gf)
+        let bf = blueSlider.value
+        let b: CGFloat = CGFloat(bf)
         
         self.colorView.backgroundColor = UIColor(red: r, green: g, blue: b, alpha: 1)
     }
