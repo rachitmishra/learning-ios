@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zIo-LZ-Z6P">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="mainStoryBoard" id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7aQ-W3-GnQ" userLabel="ImageView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7aQ-W3-GnQ" secondAttribute="height" multiplier="125:201" id="V6K-X9-u13"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="SO DOGE" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jrj-5J-0jr" userLabel="HeaderTextField">
+                                <rect key="frame" x="16" y="36" width="343" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="9LI-5c-quD"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MUCH WAO" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="buX-IL-ZYQ" userLabel="FooterTextField">
+                                <rect key="frame" x="16" y="559" width="343" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="ArR-PP-9ns" userLabel="height = 52"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done"/>
+                            </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vt-RL-Ddt">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="6G3-yV-n8i"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Pick" id="82t-dq-L2v">
+                                        <connections>
+                                            <action selector="pickImage" destination="BYZ-38-t0r" id="Olw-fU-haG"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="buX-IL-ZYQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="2ld-ZR-bVb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="buX-IL-ZYQ" secondAttribute="trailing" constant="16" id="4bP-bH-2xu"/>
+                            <constraint firstItem="jrj-5J-0jr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="4ci-2p-y4E"/>
+                            <constraint firstItem="buX-IL-ZYQ" firstAttribute="bottom" secondItem="7aQ-W3-GnQ" secondAttribute="bottom" constant="-16" id="757-s5-bMC"/>
+                            <constraint firstItem="3vt-RL-Ddt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OQU-HP-oyN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3vt-RL-Ddt" secondAttribute="bottom" id="bcp-XS-VJ7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7aQ-W3-GnQ" secondAttribute="trailing" id="iMf-gS-60m"/>
+                            <constraint firstItem="jrj-5J-0jr" firstAttribute="top" secondItem="7aQ-W3-GnQ" secondAttribute="top" constant="16" id="oMM-DN-g7e"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3vt-RL-Ddt" secondAttribute="trailing" id="u3g-Uj-GpU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jrj-5J-0jr" secondAttribute="trailing" constant="16" id="vJi-wB-LFF"/>
+                            <constraint firstItem="3vt-RL-Ddt" firstAttribute="top" secondItem="7aQ-W3-GnQ" secondAttribute="bottom" id="xo0-IX-ymF"/>
+                            <constraint firstItem="7aQ-W3-GnQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="yUI-P4-wwp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="footerTextField" destination="buX-IL-ZYQ" id="uDD-OD-npy"/>
+                        <outlet property="headerTextField" destination="jrj-5J-0jr" id="gYy-XN-uSK"/>
+                        <outlet property="imageView" destination="7aQ-W3-GnQ" id="I6M-nt-6NC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="60" y="114"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="9uL-h1-4UX">
+            <objects>
+                <tableViewController id="zIo-LZ-Z6P" customClass="TableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gA9-K6-uka">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FavoriteThingsCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteThingsCell" id="emm-vu-6ci">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="emm-vu-6ci" id="54V-fF-Upi">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="zIo-LZ-Z6P" id="NuL-BD-kLS"/>
+                            <outlet property="delegate" destination="zIo-LZ-Z6P" id="SBf-ne-uRN"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="veJ-m8-Syk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-666" y="114"/>
+        </scene>
+    </scenes>
+</document>
