@@ -10,29 +10,21 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    struct Meme {
-        
-        var header: String!
-        var footer: String!
-        var originalImage: UIImage!
-        var memedImage: UIImage!
-        
-        init(header: String, footer: String, originalImage: UIImage, memedImage: UIImage) {
-            self.header = header
-            self.footer = footer
-            self.originalImage = originalImage
-            self.memedImage = memedImage
-        }
-    }
 
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var headerTextField: UITextField!
     @IBOutlet var footerTextField: UITextField!
+    @IBOutlet var toolbar: UIToolbar!
     
     let textFieldDelegate = TextFieldDelegate()
     
     let textAttributes:[NSAttributedString.Key: Any] = [
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!]
+    
+    var memes: [Meme?] {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.memes
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +32,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         footerTextField.delegate = textFieldDelegate
         headerTextField.defaultTextAttributes = textAttributes
         footerTextField.defaultTextAttributes = textAttributes
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +62,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.sourceType = .photoLibrary
+        pickerController.allowsEditing = true
         present(pickerController, animated: true, completion: nil)
     }
     
@@ -87,21 +82,31 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func shareMeme() {
-//        let meme = Meme(header: headerTextField.text!,
-//                        footer: footerTextField.text!,
-//                        originalImage: imageView.image!,
-//                        memedImage: generateMeme())
-//
-//        let activityController = UIActivityViewController()
-//        show(activityController, nil)
+        let meme = Meme(header: headerTextField.text!,
+                        footer: footerTextField.text!,
+                        originalImage: imageView.image!,
+                        memedImage: generateMeme())
+
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.memes.append(meme)
+        let activityController = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
+        present(activityController, animated: true, completion: nil)
     }
     
     func generateMeme() -> UIImage {
+        navigationController?.isNavigationBarHidden = true
+        toolbar.isHidden = true
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
+        toolbar.isHidden = false
+        navigationController?.isNavigationBarHidden = false
         return memedImage
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 
 }
