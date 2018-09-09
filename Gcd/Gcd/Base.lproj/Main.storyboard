@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Gcd" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Io3-zZ-hCW">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XNc-MO-xfF">
+                                <rect key="frame" x="99" y="550" width="208" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jB2-so-ojZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="34" height="30"/>
+                                        <state key="normal" title="Sync"/>
+                                        <connections>
+                                            <action selector="syncDownload" destination="BYZ-38-t0r" eventType="touchUpInside" id="mzx-O4-F3x"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Utp-R3-wR8">
+                                        <rect key="frame" x="44" y="0.0" width="34" height="30"/>
+                                        <state key="normal" title="Aync"/>
+                                        <connections>
+                                            <action selector="simpleAsyncDowload" destination="BYZ-38-t0r" eventType="touchUpInside" id="lc4-T0-9kC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imK-Tg-u3z">
+                                        <rect key="frame" x="88" y="0.0" width="120" height="30"/>
+                                        <state key="normal" title="Aync and Closure"/>
+                                        <connections>
+                                            <action selector="asyncDownload" destination="BYZ-38-t0r" eventType="touchUpInside" id="0GC-n8-5PB"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NdP-et-XZX">
+                                <rect key="frame" x="85.5" y="328" width="204" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="GaP-h2-ado"/>
+                                    <constraint firstAttribute="width" constant="200" id="mHU-9J-95m"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="setAlphaWithSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="n6P-zb-HJp"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="NdP-et-XZX" firstAttribute="centerX" secondItem="Io3-zZ-hCW" secondAttribute="centerX" id="5fA-Db-Tca"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Io3-zZ-hCW" secondAttribute="trailing" id="GDd-Wt-urN"/>
+                            <constraint firstItem="Io3-zZ-hCW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="I5P-mR-RTc"/>
+                            <constraint firstItem="Io3-zZ-hCW" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="eh7-8C-kqz"/>
+                            <constraint firstItem="NdP-et-XZX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="308" id="qO5-Wx-ARb"/>
+                            <constraint firstItem="Io3-zZ-hCW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="te2-Wx-CYe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Io3-zZ-hCW" secondAttribute="bottom" id="zqf-WW-PKL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="image" destination="Io3-zZ-hCW" id="puB-P7-gVB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

@@ -95,9 +95,9 @@
 				3CD83FEC21300EC9005811FA /* Main.storyboard */,
 				3CD83FE821300EC9005811FA /* StarredNoteController.swift */,
 				3CD83FEA21300EC9005811FA /* MainViewController.swift */,
+				3CD8400821319E9F005811FA /* NewNoteTextViewDelegate.swift */,
 				3CD8400621317F4D005811FA /* WelcomeViewController.swift */,
 				3CD8400421317551005811FA /* NewNoteViewController.swift */,
-				3CD8400821319E9F005811FA /* NewNoteTextViewDelegate.swift */,
 				3CD83FFE2130BCA4005811FA /* HalfSizeViewController.swift */,
 			);
 			path = Views;
