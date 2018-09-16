@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
-class MainViewController: UIViewController, UIViewControllerTransitioningDelegate {
+class MainViewController: UIViewController, UIViewControllerTransitioningDelegate,
+DataControllerDelegate{
     
     @IBOutlet var nameLabel : UILabel!
+    
+    @IBOutlet var table: UITableView!
+    
+    var dataController: DataController!
     
     var notes: [Note] = []
 
@@ -26,27 +32,36 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         navigationItem.leftBarButtonItem = backButton
         let name = UserDefaults.standard.string(forKey: "readableName")
         nameLabel.text = "Hello, \(name ?? "Jon")"
-        downloadImage()
+        
+        table.delegate = self
+        table.dataSource = self
+        
+        loadData()
     }
     
-    func downloadImage() {
-        let url = URL.init(fileURLWithPath: "https://flavorwire.files.wordpress.com/2013/11/calvin-and-hobbes.jpg")
-        URLSession.shared.dataTask(with: url) {
-            (data, response, error) in
-            print(response)
-        }.resume()
+    func loadData() {
+        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+        let sortDesc = NSSortDescriptor(key: "edited_on", ascending: false)
+        fetchRequest.sortDescriptors = [sortDesc]
+        //NSPredicate(format: "attribute = %@", someValue)
+        if let result = try? dataController!.viewContext.fetch(fetchRequest) {
+            notes = result
+            table.reloadData()
+        }
     }
     
     @IBAction func addNewNote() {
 //        performSegue(withIdentifier: "newNote", sender: self)
         
-        let pvc = storyboard?.instantiateViewController(withIdentifier: "NewNote") as! UIViewController
+        let pvc = storyboard?.instantiateViewController(withIdentifier: "NewNote") as! NewNoteViewController
         pvc.view.layer.shadowColor = UIColor.lightGray.cgColor
         pvc.view.layer.shadowRadius = 2
         pvc.view.layer.shadowOffset = CGSize(width: 0, height: -4)
         pvc.view.layer.shadowOpacity = 0.2
         pvc.modalPresentationStyle = .custom
         pvc.transitioningDelegate = self
+        pvc.dataController = self.dataController
+        
         present(pvc, animated: true, completion: nil)
     }
     
@@ -64,5 +79,6 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     func deleteHandler(alertAction: UIAlertAction) {
         //onDelete?()
     }
+    
 }
 

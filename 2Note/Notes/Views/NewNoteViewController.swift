@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
-class NewNoteViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class NewNoteViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DataControllerDelegate {
 
     @IBOutlet var noteTextView: UITextView!
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var tagTextField: UITextField!
+    
+    var dataController: DataController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,8 +96,13 @@ class NewNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
         
 
         let tags: [Substring] = tagTextField.text?.split(separator: ",") ?? []
-        let note:Note
-    
+        let note = Note(context: self.dataController.viewContext)
+        note.title = titleTextField.text
+        note.text = noteTextView.text
+        note.created_on = Date()
+        note.edited_on = Date()
+        note.tags = tagTextField.text
+        try? dataController.viewContext.save()
         self.dismiss(animated: true, completion: nil)
     }
     
