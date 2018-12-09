@@ -1,0 +1,8 @@
+platform :ios, '12.0'
+use_frameworks!
+
+target 'SF-CS193' do
+pod 'AFNetworking', '~> 2.6'
+pod 'ORStackView', '~> 3.0'
+pod 'SwiftyJSON', '~> 2.3'
+end
