@@ -1,0 +1,20 @@
+# Uncomment the next line to define a global platform for your project
+use_frameworks!
+platform :ios, '12.1'
+
+target 'cinema' do
+
+  # Pods for cinema
+	pod 'FirebaseUI/Google', '~> 5.0'
+	pod 'Alamofire', '~> 5.0.0.beta.1'
+    pod 'Firebase/Core'
+    pod 'Mapbox-iOS-SDK', '~> 4.6.0'
+    pod 'RxSwift',    '~> 4.0'
+    pod 'RxCocoa',    '~> 4.0'
+    pod 'SwiftLint'
+
+    # For testing RxSwift
+    # pod 'RxBlocking', '~> 4.0'
+    # pod 'RxTest',     '~> 4.0' 
+
+end
