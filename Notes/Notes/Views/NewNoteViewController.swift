@@ -9,13 +9,11 @@
 import UIKit
 import CoreData
 
-class NewNoteViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DataControllerDelegate {
+class NewNoteViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var noteTextView: UITextView!
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var tagTextField: UITextField!
-    
-    var dataController: DataController!
     
     override func viewDidLoad() {
         super.viewDidLoad()

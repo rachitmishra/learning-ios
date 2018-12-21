@@ -9,14 +9,11 @@
 import UIKit
 import CoreData
 
-class MainViewController: UIViewController, UIViewControllerTransitioningDelegate,
-DataControllerDelegate {
+class MainViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     @IBOutlet var nameLabel : UILabel!
     
     @IBOutlet var table: UITableView!
-    
-    var dataController: DataController!
     
     var fetchedResultsController: NSFetchedResultsController<Note>!
     
@@ -24,16 +21,10 @@ DataControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let titleImage = UIImage(named: "peng.png")
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = titleImage
-        navigationController?.navigationBar.topItem?.titleView = imageView
-        navigationController?.navigationBar.barStyle = .default
         let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
         navigationItem.leftBarButtonItem = backButton
         let name = UserDefaults.standard.string(forKey: "readableName")
-        nameLabel.text = "Hello, \(name ?? "Jon")"
+        nameLabel.text = "Mon, 25 Dec"
         
         table.delegate = self
         table.dataSource = self
@@ -49,10 +40,10 @@ DataControllerDelegate {
         //NSPredicate(format: "attribute = %@", someValue)
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
-//        if let result = try? dataController!.viewContext.fetch(fetchRequest) {
-//            notes = result
-//            table.reloadData()
-//        }
+        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+            notes = result
+            table.reloadData()
+        }
         do {
             try fetchedResultsController.performFetch()
         } catch {
@@ -71,7 +62,6 @@ DataControllerDelegate {
         pvc.view.layer.shadowOpacity = 0.2
         pvc.modalPresentationStyle = .custom
         pvc.transitioningDelegate = self
-        pvc.dataController = self.dataController
         
         present(pvc, animated: true, completion: nil)
     }

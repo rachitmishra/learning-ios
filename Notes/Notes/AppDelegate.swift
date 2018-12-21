@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let dataController = DataController(modelName: "Notes")
+    var dataController = DataController(modelName: "Notes")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -23,9 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let navController = window?.rootViewController as! NavigationController
-        if var dataControllerDelegate = navController.topViewController as? DataControllerDelegate {
-            dataControllerDelegate.dataController = self.dataController
-        }
+        
         return true
     }
 
@@ -55,5 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         try! dataController.viewContext.save()
     }
     
+    static func dataController() -> DataController {
+        return (UIApplication.shared.delegate as! AppDelegate).dataController
+    }
 }
 

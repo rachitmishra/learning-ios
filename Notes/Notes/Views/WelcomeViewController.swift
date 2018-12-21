@@ -8,12 +8,9 @@
 
 import UIKit
 
-class WelcomeViewController: UIViewController, UIViewControllerTransitioningDelegate,
-DataControllerDelegate {
+class WelcomeViewController: UIViewController, UIViewControllerTransitioningDelegate {
 
     @IBOutlet var nameField: UITextField!
-    
-    var dataController: DataController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +22,4 @@ DataControllerDelegate {
         
         performSegue(withIdentifier: "homeScreen", sender: self)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nextViewController = segue.destination as! MainViewController
-        nextViewController.dataController = self.dataController
-    }
 }
-
