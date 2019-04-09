@@ -9,13 +9,13 @@
 import UIKit
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notes.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for:indexPath) as! NoteListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath) as! NoteListCell
 
         let note = fetchedResultsController.object(at: indexPath)// self.notes[indexPath.row]
         cell.title.text = note.title
@@ -23,7 +23,5 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.lastEdited.text = note.edited_on?.description
         return cell
     }
-    
-
 }
 

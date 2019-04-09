@@ -256,7 +256,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2zX-6p-6hP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2zX-6p-6hP">
                                 <rect key="frame" x="0.0" y="128" width="375" height="540"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -303,6 +303,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="2zX-6p-6hP" firstAttribute="trailing" secondItem="jZZ-bi-yii" secondAttribute="trailing" id="1Di-OK-O8K"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="2zX-6p-6hP" secondAttribute="bottom" constant="-1" id="4u6-yC-6Zg"/>
                             <constraint firstItem="jZZ-bi-yii" firstAttribute="leading" secondItem="zTy-Q3-rlt" secondAttribute="leading" id="603-vd-llM"/>
                             <constraint firstItem="jZZ-bi-yii" firstAttribute="bottom" secondItem="zTy-Q3-rlt" secondAttribute="bottom" id="6y2-RU-vsk"/>
                             <constraint firstItem="zTy-Q3-rlt" firstAttribute="trailing" secondItem="lJM-4n-XXu" secondAttribute="trailing" constant="16" id="I1k-QA-F56"/>
