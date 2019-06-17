@@ -27,7 +27,7 @@ urlComponent?.host = RachitMishra.init().host
 
 struct GoogleSearch {
     static let scheme = "https"
-    static let host = "google.com"
+    static let host = "photos.google.com"
     static let path = "/search"
     static let queryName = "query"
     static let udacitySearchTerm = "udacity"
@@ -53,7 +53,7 @@ print(components.url!)
  URLSessionStreamTask: Getting a continuous stream of data from a server.
  */
 
-let task = URLSession.shared.dataTask(with: components.url!) { (data, uRLResponse, error) in
+let task = URLSession.shared.dataTask(with: components.url!) { (data, urlResponse, error) in
     print(data)
 }
 task.resume()
@@ -69,7 +69,7 @@ let dogApiUrl = URL(string: "https://dog.ceo/api/breeds/image/random")!
 
 let dogApiTask = URLSession.shared.dataTask(with: dogApiUrl) { (data, urlResponse, error) in
     do {
-//        let json = try JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any]
+//        let json = try JSONSerialization.jsonObject(with: data!, options: []) as! [String:String]
 //        print(json)
 //        let urlFromJson = json["message"] as! String
 //        print(urlFromJson)
