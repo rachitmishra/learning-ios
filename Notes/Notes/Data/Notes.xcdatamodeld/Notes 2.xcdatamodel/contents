@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.12.1" systemVersion="18A389" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="19A471t" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Note" representedClassName="Note" syncable="YES" codeGenerationType="class">
         <attribute name="attachment_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created_on" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -14,8 +14,9 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Note" inverseName="notebook" inverseEntity="Note" syncable="YES"/>
     </entity>
+    <fetchRequest name="FetchRequest" entity="Note"/>
     <elements>
-        <element name="Note" positionX="-289.9140625" positionY="-152.03515625" width="128" height="150"/>
+        <element name="Note" positionX="-289.9140625" positionY="-152.03515625" width="128" height="148"/>
         <element name="Notebook" positionX="-591.93359375" positionY="-92.375" width="128" height="88"/>
     </elements>
 </model>

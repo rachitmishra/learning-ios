@@ -10,11 +10,13 @@ import UIKit
 import CoreData
 
 extension MainViewController: NSFetchedResultsControllerDelegate {
-    
+
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
             table.insertRows(at: [newIndexPath!], with: .fade)
+//        case .update:
+//            table.reloadRows(at: [newIndexPath!], with: .fade)
         default:
             table.deleteRows(at: [indexPath!], with: .fade)
         }

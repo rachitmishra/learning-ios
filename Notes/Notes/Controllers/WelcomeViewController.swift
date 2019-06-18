@@ -17,8 +17,12 @@ class WelcomeViewController: UIViewController, UIViewControllerTransitioningDele
      }
     
     @IBAction func saveName() {
+        // Save data
         UserDefaults.standard.set(nameField.text, forKey: "readableName")
         UserDefaults.standard.set(true, forKey: "isFirstLaunch")
+
+        // Force to save
+        UserDefaults.standard.synchronize()
         
         performSegue(withIdentifier: "homeScreen", sender: self)
     }

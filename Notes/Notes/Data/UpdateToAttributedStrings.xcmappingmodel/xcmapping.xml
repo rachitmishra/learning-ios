@@ -1,16 +1,16 @@
-<?xml version="1.0"?>
+<?xml version="1.0" standalone="yes"?>
 <!DOCTYPE database SYSTEM "file:///System/Library/DTDs/CoreData.dtd">
 
 <database>
     <databaseInfo>
         <version>134481920</version>
         <UUID>122031E3-8536-483E-A545-82FC4369A657</UUID>
-        <nextObjectID>114</nextObjectID>
+        <nextObjectID>115</nextObjectID>
         <metadata>
             <plist version="1.0">
                 <dict>
                     <key>NSPersistenceFrameworkVersion</key>
-                    <integer>865</integer>
+                    <integer>947</integer>
                     <key>NSStoreModelVersionHashes</key>
                     <dict>
                         <key>XDDevAttributeMapping</key>
@@ -54,14 +54,15 @@
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z112"></relationship>
     </object>
     <object type="XDDEVENTITYMAPPING" id="z104">
+        <attribute name="migrationpolicyclassname" type="string">UpdateToAttributeStringPolicy</attribute>
         <attribute name="sourcename" type="string">Note</attribute>
         <attribute name="mappingtypename" type="string">Undefined</attribute>
         <attribute name="mappingnumber" type="int16">2</attribute>
         <attribute name="destinationname" type="string">Note</attribute>
         <attribute name="autogenerateexpression" type="bool">1</attribute>
         <relationship name="mappingmodel" type="1/1" destination="XDDEVMAPPINGMODEL" idrefs="z107"></relationship>
-        <relationship name="attributemappings" type="0/0" destination="XDDEVATTRIBUTEMAPPING" idrefs="z110 z113 z102 z114 z106 z111"></relationship>
-        <relationship name="relationshipmappings" type="0/0" destination="XDDEVRELATIONSHIPMAPPING" idrefs="z109"></relationship>
+        <relationship name="attributemappings" type="0/0" destination="XDDEVATTRIBUTEMAPPING" idrefs="z110 z102 z106 z114 z111 z113"></relationship>
+        <relationship name="relationshipmappings" type="0/0" destination="XDDEVRELATIONSHIPMAPPING"></relationship>
     </object>
     <object type="XDDEVATTRIBUTEMAPPING" id="z105">
         <attribute name="name" type="string">created_on</attribute>
@@ -87,9 +88,10 @@ cBIAAYagrxEBXQAHAAgAFwAzADQANQA/AEAAQQBcAF0AXgBkAGUAcQCHAIgAiQCKAIsAjACNAI4AjwCQ
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z112"></relationship>
     </object>
     <object type="XDDEVRELATIONSHIPMAPPING" id="z109">
+        <attribute name="sourcemappingname" type="string">NoteToNote</attribute>
         <attribute name="autogenerateexpression" type="bool">1</attribute>
         <attribute name="name" type="string">notebook</attribute>
-        <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z104"></relationship>
+        <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING"></relationship>
     </object>
     <object type="XDDEVATTRIBUTEMAPPING" id="z110">
         <attribute name="name" type="string">created_on</attribute>
@@ -106,7 +108,7 @@ cBIAAYagrxEBXQAHAAgAFwAzADQANQA/AEAAQQBcAF0AXgBkAGUAcQCHAIgAiQCKAIsAjACNAI4AjwCQ
         <attribute name="destinationname" type="string">Notebook</attribute>
         <attribute name="autogenerateexpression" type="bool">1</attribute>
         <relationship name="mappingmodel" type="1/1" destination="XDDEVMAPPINGMODEL" idrefs="z107"></relationship>
-        <relationship name="attributemappings" type="0/0" destination="XDDEVATTRIBUTEMAPPING" idrefs="z105 z108"></relationship>
+        <relationship name="attributemappings" type="0/0" destination="XDDEVATTRIBUTEMAPPING" idrefs="z108 z105"></relationship>
         <relationship name="relationshipmappings" type="0/0" destination="XDDEVRELATIONSHIPMAPPING" idrefs="z103"></relationship>
     </object>
     <object type="XDDEVATTRIBUTEMAPPING" id="z113">
@@ -116,5 +118,9 @@ cBIAAYagrxEBXQAHAAgAFwAzADQANQA/AEAAQQBcAF0AXgBkAGUAcQCHAIgAiQCKAIsAjACNAI4AjwCQ
     <object type="XDDEVATTRIBUTEMAPPING" id="z114">
         <attribute name="name" type="string">edited_on</attribute>
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z104"></relationship>
+    </object>
+    <object type="XDDEVRELATIONSHIPMAPPING" id="z115">
+        <attribute name="autogenerateexpression" type="bool">1</attribute>
+        <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING"></relationship>
     </object>
 </database>

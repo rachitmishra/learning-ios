@@ -14,6 +14,10 @@ class NewNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet var noteTextView: UITextView!
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var tagTextField: UITextField!
+
+    var onNoteSaved : ((Bool) -> Void)?
+
+    var safeObserverToken: Any?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +27,7 @@ class NewNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         noteTextView.delegate = self
+        addSaveNotificationObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,12 +54,12 @@ class NewNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @objc func keyboardWillShowNotification(_ notification: Notification) {
         let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-        view.frame.origin.y = view.frame.origin.y - keyboardFrame.height
+        //view.frame.origin.y = view.frame.origin.y - keyboardFrame.height
     }
     
     @objc func keyboardWillHideNotification(_ notification: Notification) {
         let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-        view.frame.origin.y = view.frame.origin.y + keyboardFrame.height
+        //view.frame.origin.y = view.frame.origin.y + keyboardFrame.height
     }
     
     @IBAction func pickImage() {
@@ -100,11 +105,38 @@ class NewNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
         note.created_on = Date()
         note.edited_on = Date()
         note.tags = tagTextField.text
+
+        let noteId = note.objectID
+//        dataController.backgroundContext.perform {
+//            let backgroundNote = self.dataController.backgroundContext.object(with: noteId) as! Note
+//
+//            try? self.dataController.backgroundContext.save()
+//
+//        }
         try? dataController.viewContext.save()
+        onNoteSaved?(true)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func attachment() {
         
+    }
+}
+
+extension NewNoteViewController {
+
+    func addSaveNotificationObserver() {
+removeSaveNotificationObserver()
+        safeObserverToken = NotificationCenter.default.addObserver(forName: .NSManagedObjectContextObjectsDidChange, object: dataController.viewContext, queue: nil, using: handleSaveNotification(notification:))
+    }
+
+    func removeSaveNotificationObserver() {
+        if let token = safeObserverToken {
+            NotificationCenter.default.removeObserver(token)
+        }
+    }
+
+    func handleSaveNotification(notification: Notification) {
+
     }
 }

@@ -12,7 +12,8 @@ class NavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        // Get UserDefaults value
         let isFirstLaunch = UserDefaults.standard.bool(forKey: "isNotFirstLaunch")
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let welcomeController =

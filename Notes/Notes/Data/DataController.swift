@@ -16,22 +16,31 @@ class DataController {
     var viewContext: NSManagedObjectContext {
         return persistantContainer.viewContext
     }
+
+    var backgroundContext: NSManagedObjectContext!
     
     init(modelName: String) {
         persistantContainer = NSPersistentContainer(name: modelName)
+
+//        persistantContainer.performBackgroundTask({ context in
+//            // do somthing on background
+//        })
+//
+//        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
     }
     
-    func load(completion: (() -> Void)?) {
+    func load(completion: (() -> Void)? = nil) {
         persistantContainer.loadPersistentStores { description, error in
             guard error == nil else {
                 fatalError(error!.localizedDescription)
             }
         }
-        autoSaveViewContext()
+        self.autoSaveViewContext()
+        self.configureContexts()
         completion?()
     }
 }
-    
+
 extension DataController {
     func autoSaveViewContext(interval: TimeInterval = 30) {
         guard interval > 0 else {
@@ -46,5 +55,14 @@ extension DataController {
         DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
             self.autoSaveViewContext()
         }
+    }
+
+    func configureContexts() {
+        let backgroundContext = persistantContainer.newBackgroundContext()
+        viewContext.automaticallyMergesChangesFromParent = true
+        backgroundContext.automaticallyMergesChangesFromParent = true
+
+        backgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
     }
 }

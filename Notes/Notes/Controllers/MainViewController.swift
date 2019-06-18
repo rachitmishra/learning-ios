@@ -11,10 +11,11 @@ import CoreData
 
 class MainViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
-    @IBOutlet var nameLabel : UILabel!
+    @IBOutlet weak var nameLabel : UILabel!
     
-    @IBOutlet var table: UITableView!
-    
+    @IBOutlet weak var table: UITableView!
+
+    // Add fetch results controller property
     var fetchedResultsController: NSFetchedResultsController<Note>!
     
     var notes: [Note] = []
@@ -28,32 +29,43 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         table.delegate = self
         table.dataSource = self
-        
         loadData()
+        debugPrint(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     
     func loadData() {
-        
+        // Init fetch results controllers
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+
+        // Sorting is must for fetch results controllers
         let sortDesc = NSSortDescriptor(key: "edited_on", ascending: false)
         fetchRequest.sortDescriptors = [sortDesc]
-        //NSPredicate(format: "attribute = %@", someValue)
+//
+//        let predicate =  NSPredicate(format: "title LIKE %@", "Other*")
+//        fetchRequest.predicate = predicate
+//        // IN, LIKE, ==, BETWEEN
+//
+//        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+//            notes = result
+//            table.reloadData()
+//        }
+
+
+//        NSFetchedResultsController<Note>.deleteCache(cacheName)
+
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        // sectionNameKeyPath can be used to group
         fetchedResultsController.delegate = self
-        if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            notes = result
-            table.reloadData()
-        }
         do {
             try fetchedResultsController.performFetch()
         } catch {
            fatalError(error.localizedDescription)
         }
-        
+
     }
     
     @IBAction func addNewNote() {
-//        performSegue(withIdentifier: "newNote", sender: self)
+        //performSegue(withIdentifier: "newNote", sender: self)
         
         let pvc = storyboard?.instantiateViewController(withIdentifier: "NewNote") as! NewNoteViewController
         pvc.view.layer.shadowColor = UIColor.lightGray.cgColor
@@ -62,6 +74,9 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         pvc.view.layer.shadowOpacity = 0.2
         pvc.modalPresentationStyle = .custom
         pvc.transitioningDelegate = self
+        pvc.onNoteSaved = { result in
+            self.loadData()
+        }
         
         present(pvc, animated: true, completion: nil)
     }
@@ -70,19 +85,31 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         return HalfSizePresentationController(presentedViewController: presented, presenting: presenting)
     }
     
-    func deleteNote() {
+    func deleteNote(_ indexPath: IndexPath, note: Note?) {
         let alert = UIAlertController(title: "Delete Note", message: "Do you want to delete this note?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: deleteHandler))
-        present(alert, animated: true, completion: nil)
-    }
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
 
-    func deleteHandler(alertAction: UIAlertAction) {
-        //onDelete?()
+            let noteToDelete = self.fetchedResultsController.object(at: indexPath)
+            self.dataController.viewContext.delete(noteToDelete)
+            self.dataController.viewContext.saveWithGrace()
+//            self.loadData()
+        }))
+        present(alert, animated: true, completion: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        // De init fetch results controllers
         fetchedResultsController = nil
+    }
+}
+
+extension NSManagedObjectContext {
+
+    func saveWithGrace() {
+        if hasChanges {
+            try? save()
+        }
     }
 }
 
