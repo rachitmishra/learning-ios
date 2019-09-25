@@ -14,19 +14,12 @@ class DataController {
     let persistantContainer: NSPersistentContainer!
     
     var viewContext: NSManagedObjectContext {
+        // Main queue
         return persistantContainer.viewContext
     }
 
-    var backgroundContext: NSManagedObjectContext!
-    
     init(modelName: String) {
         persistantContainer = NSPersistentContainer(name: modelName)
-
-//        persistantContainer.performBackgroundTask({ context in
-//            // do somthing on background
-//        })
-//
-//        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
     }
     
     func load(completion: (() -> Void)? = nil) {
@@ -36,7 +29,6 @@ class DataController {
             }
         }
         self.autoSaveViewContext()
-        self.configureContexts()
         completion?()
     }
 }
@@ -55,14 +47,5 @@ extension DataController {
         DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
             self.autoSaveViewContext()
         }
-    }
-
-    func configureContexts() {
-        let backgroundContext = persistantContainer.newBackgroundContext()
-        viewContext.automaticallyMergesChangesFromParent = true
-        backgroundContext.automaticallyMergesChangesFromParent = true
-
-        backgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
     }
 }

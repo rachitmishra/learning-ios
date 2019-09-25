@@ -14,16 +14,16 @@ class NavigationController: UINavigationController {
         super.viewDidLoad()
 
         // Get UserDefaults value
-        let isFirstLaunch = UserDefaults.standard.bool(forKey: "isNotFirstLaunch")
+        let isNotFirstLaunch = UserDefaults.standard.bool(forKey: "isNotFirstLaunch")
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let welcomeController =
             storyBoard.instantiateViewController(withIdentifier: "welcomeScreen") as! WelcomeViewController
         let mainController =
             storyBoard.instantiateViewController(withIdentifier: "homeScreen") as! MainViewController
-        if (isFirstLaunch) {
-            self.viewControllers = [welcomeController]
-        } else {
+        if (isNotFirstLaunch) {
             self.viewControllers = [mainController]
+        } else {
+            self.viewControllers = [welcomeController]
         }
     }
 }

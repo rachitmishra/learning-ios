@@ -13,15 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var dataController = DataController(modelName: "Notes")
+    var dataController = DataController(modelName: "NotesNew")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         dataController.load()
-        
-        let navController = window?.rootViewController as! NavigationController
-        
         return true
     }
 

@@ -99,20 +99,14 @@ class NewNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
         
 
         let tags: [Substring] = tagTextField.text?.split(separator: ",") ?? []
+
         let note = Note(context: self.dataController.viewContext)
         note.title = titleTextField.text
-        note.text = NSAttributedString(string: noteTextView.text)
-        note.created_on = Date()
-        note.edited_on = Date()
+        note.text = noteTextView.text
+        note.created_at = Date()
+        note.edited_at = Date()
         note.tags = tagTextField.text
 
-        let noteId = note.objectID
-//        dataController.backgroundContext.perform {
-//            let backgroundNote = self.dataController.backgroundContext.object(with: noteId) as! Note
-//
-//            try? self.dataController.backgroundContext.save()
-//
-//        }
         try? dataController.viewContext.save()
         onNoteSaved?(true)
         self.dismiss(animated: true, completion: nil)
@@ -121,13 +115,17 @@ class NewNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func attachment() {
         
     }
+
+    @IBAction func close() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension NewNoteViewController {
 
     func addSaveNotificationObserver() {
 removeSaveNotificationObserver()
-        safeObserverToken = NotificationCenter.default.addObserver(forName: .NSManagedObjectContextObjectsDidChange, object: dataController.viewContext, queue: nil, using: handleSaveNotification(notification:))
+//        safeObserverToken = NotificationCenter.default.addObserver(forName: .NSManagedObjectContextObjectsDidChange, object: dataController.viewContext, queue: nil, using: handleSaveNotification(notification:))
     }
 
     func removeSaveNotificationObserver() {

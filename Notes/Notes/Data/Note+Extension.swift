@@ -13,6 +13,6 @@ extension Note {
     
     public override func awakeFromInsert() {
         super.awakeFromInsert()
-        created_on = Date()
+        created_at = Date()
     }
 }

@@ -22,9 +22,8 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
-        navigationItem.leftBarButtonItem = backButton
-        let name = UserDefaults.standard.string(forKey: "readableName")
+        hideBackButton()
+        _ = getStringPref(forKey: .readableName)
         nameLabel.text = "Mon, 25 Dec"
         
         table.delegate = self
@@ -32,13 +31,29 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         loadData()
         debugPrint(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+
+        // Sorting is must for fetch results controllers
+        let sortDesc = NSSortDescriptor(key: "edited_at", ascending: false)
+        fetchRequest.sortDescriptors = [sortDesc]
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        // sectionNameKeyPath can be used to group
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
     
     func loadData() {
         // Init fetch results controllers
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
 
         // Sorting is must for fetch results controllers
-        let sortDesc = NSSortDescriptor(key: "edited_on", ascending: false)
+        let sortDesc = NSSortDescriptor(key: "edited_at", ascending: false)
         fetchRequest.sortDescriptors = [sortDesc]
 //
 //        let predicate =  NSPredicate(format: "title LIKE %@", "Other*")
@@ -52,15 +67,6 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
 
 
 //        NSFetchedResultsController<Note>.deleteCache(cacheName)
-
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        // sectionNameKeyPath can be used to group
-        fetchedResultsController.delegate = self
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-           fatalError(error.localizedDescription)
-        }
 
     }
     
@@ -84,7 +90,7 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return HalfSizePresentationController(presentedViewController: presented, presenting: presenting)
     }
-    
+
     func deleteNote(_ indexPath: IndexPath, note: Note?) {
         let alert = UIAlertController(title: "Delete Note", message: "Do you want to delete this note?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -92,23 +98,32 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
 
             let noteToDelete = self.fetchedResultsController.object(at: indexPath)
             self.dataController.viewContext.delete(noteToDelete)
-            self.dataController.viewContext.saveWithGrace()
-//            self.loadData()
+            //self.dataController.viewContext.saveWithGrace()
+            self.loadData()
         }))
         present(alert, animated: true, completion: nil)
     }
+
+
+//    func bookmarkNote(_ indexPath: IndexPath, note: Note?) {
+//        // Todo
+//    }
+
     
     override func viewDidDisappear(_ animated: Bool) {
         // De init fetch results controllers
         fetchedResultsController = nil
     }
-}
 
-extension NSManagedObjectContext {
-
-    func saveWithGrace() {
-        if hasChanges {
-            try? save()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "noteDetail" {
+            if let selectedItemPath = table.indexPathForSelectedRow {
+                if let selectedItem = fetchedResultsController.object(at: selectedItemPath) as Note? {
+                    if let destination = segue.destination as? NoteDetailViewController {
+                        destination.selectedNote = selectedItem
+                    }
+                }
+            }
         }
     }
 }
