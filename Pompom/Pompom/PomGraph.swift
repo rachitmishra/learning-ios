@@ -16,10 +16,9 @@ struct PomItem: View {
                     center: .topLeading)
 
     var body: some View {
-        Rectangle()
+        Capsule()
         .fill(backgroundGradient)
-        .frame(width: 24, height: 96)
-        .cornerRadius(10.0)
+            .frame(width: 24, height: pomodoro.getHeightRatio())
          .padding(.leading, 16.0)
     }
 }

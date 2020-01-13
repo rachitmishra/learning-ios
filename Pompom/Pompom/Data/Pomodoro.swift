@@ -18,6 +18,10 @@ struct Pomodoro: Identifiable {
     func start() {
 
     }
+
+    func getHeightRatio() {
+        
+    }
 }
 
 struct PomodoroCategory: Identifiable {
